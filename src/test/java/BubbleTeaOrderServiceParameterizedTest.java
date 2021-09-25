@@ -2,22 +2,48 @@ import com.techreturners.bubbleteaordersystem.model.*;
 import com.techreturners.bubbleteaordersystem.service.BubbleTeaMessenger;
 import com.techreturners.bubbleteaordersystem.service.BubbleTeaOrderService;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 import testhelper.DummySimpleLogger;
 
-import static org.junit.Assert.*;
+import java.util.Arrays;
+import java.util.Collection;
+
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
-public class BubbleTeaOrderServiceTest {
+@RunWith(Parameterized.class)
+public class BubbleTeaOrderServiceParameterizedTest {
+
+    @Parameterized.Parameters
+    public static Collection<Object[]> data() {
+        return Arrays.asList(new Object[][] {
+                { BubbleTeaTypeEnum.LycheeIceTea },
+                { BubbleTeaTypeEnum.PeachIceTea },
+                { BubbleTeaTypeEnum.MatchaMilkTea},
+                { BubbleTeaTypeEnum.OolongMilkTea},
+                { BubbleTeaTypeEnum.JasmineMilkTea}
+        });
+    }
 
     private DebitCard testDebitCard;
     private PaymentDetails paymentDetails;
     private DummySimpleLogger dummySimpleLogger;
     private BubbleTeaMessenger mockMessenger;
     private BubbleTeaOrderService bubbleTeaOrderService;
+    private BubbleTeaTypeEnum bubbleTeaTypeEnum;
 
-    @BeforeEach
+    public  BubbleTeaOrderServiceParameterizedTest(BubbleTeaTypeEnum bubbleTeaTypeEnum){this.bubbleTeaTypeEnum =bubbleTeaTypeEnum;}
+
+    @Test
+    public void shouldReturnCorrectSum() {
+        int actualSum = 1+  2;
+        assertEquals(actualSum, 3);
+    }
+
+    @Before
     public void setup() {
         testDebitCard = new DebitCard("0123456789");
         paymentDetails = new PaymentDetails("hello kitty", "sanrio puroland", testDebitCard);
@@ -30,14 +56,14 @@ public class BubbleTeaOrderServiceTest {
     public void shouldCreateBubbleTeaOrderRequestWhenCreateOrderRequestIsCalled() {
 
         //Arrange
-        BubbleTea bubbleTea = new BubbleTea(BubbleTeaTypeEnum.OolongMilkTea, 4.5);
+        BubbleTea bubbleTea = new BubbleTea(bubbleTeaTypeEnum, 4.5);
         BubbleTeaRequest bubbleTeaRequest = new BubbleTeaRequest(paymentDetails, bubbleTea);
 
         BubbleTeaOrderRequest expectedResult = new BubbleTeaOrderRequest(
                 "hello kitty",
                 "sanrio puroland",
                 "0123456789",
-                BubbleTeaTypeEnum.OolongMilkTea
+                bubbleTeaTypeEnum
         );
 
         //Act
