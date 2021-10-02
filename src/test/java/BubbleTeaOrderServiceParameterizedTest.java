@@ -37,12 +37,6 @@ public class BubbleTeaOrderServiceParameterizedTest {
 
     public  BubbleTeaOrderServiceParameterizedTest(BubbleTeaTypeEnum bubbleTeaTypeEnum){this.bubbleTeaTypeEnum =bubbleTeaTypeEnum;}
 
-    @Test
-    public void shouldReturnCorrectSum() {
-        int actualSum = 1+  2;
-        assertEquals(actualSum, 3);
-    }
-
     @Before
     public void setup() {
         testDebitCard = new DebitCard("0123456789");
