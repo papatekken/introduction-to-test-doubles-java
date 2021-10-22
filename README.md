@@ -36,9 +36,10 @@ Feel free to head back to review the concepts again.
 We encourage you to do some of your own research and experimentation in your own time to explore these concepts further.
 
 -----
+### Allan Yip
 
 ## Improvements
 
-### test function shouldGenerateBubbleTeaTypePeachIceTeaWhenGetRandomBubbleTeaTypeIsCalled() is added in test class BubbleTeaRouletteServiceTest
+test function shouldGenerateBubbleTeaTypePeachIceTeaWhenGetRandomBubbleTeaTypeIsCalled() is added in test class BubbleTeaRouletteServiceTest
 
-### new class file BubbleTeaOrderServiceParameterizedTest is added for perform parameterized test
+new class file BubbleTeaOrderServiceParameterizedTest is added for perform parameterized test
